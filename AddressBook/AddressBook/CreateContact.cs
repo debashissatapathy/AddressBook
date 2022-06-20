@@ -265,7 +265,28 @@ namespace AddressBook
             }
             Console.WriteLine("There are {0} Persons in {1}:", count, CityOrState);
         }
-        
+        public void ContactByCity()
+        {
+            Console.WriteLine("Please enter the name of City:");
+            string CityOrState = Console.ReadLine();
+            try
+            {
+                var data = People.GroupBy(x => x.City);
+                foreach (var cities in data)
+                {
+                    List<Contacts> citylist = new List<Contacts>();
+                    foreach (var city in cities)
+                    {
+                        citylist.Add(city);
+                    }
+                    dict_City.Add(cities.Key, citylist);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public void ViewContact()
         {
             foreach (var data in People)
