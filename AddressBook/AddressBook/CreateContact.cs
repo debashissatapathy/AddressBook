@@ -11,6 +11,7 @@ namespace AddressBook
         public Contacts contact = new Contacts();
         public List<Contacts> People = new List<Contacts>();
         Dictionary<string, List<Contacts>> dict = new Dictionary<string, List<Contacts>>();
+        Dictionary<string, List<Contacts>> dict_City = new Dictionary<string, List<Contacts>>();
 
         public void AddContact()
         {
@@ -264,6 +265,7 @@ namespace AddressBook
             }
             Console.WriteLine("There are {0} Persons in {1}:", count, CityOrState);
         }
+        
         public void ViewContact()
         {
             foreach (var data in People)

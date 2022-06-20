@@ -38,6 +38,9 @@ while (true)
             contact.SearchByCityState();
             break;
         case 8:
+            contact.CountByCityState();
+            break;
+        case 9:
             contact.ViewContact();
             break;
 
