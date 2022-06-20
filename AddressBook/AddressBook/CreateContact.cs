@@ -17,7 +17,7 @@ namespace AddressBook
             int flag = 0;
             
             Console.WriteLine("Enter first Name");
-            string AddFirstName = contact.FirstName = Console.ReadLine();
+            string AddFirstName = Console.ReadLine();
 
             foreach (var data in People)
             {
@@ -171,7 +171,65 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }       
         }
+        public void AddMultipleContact(int n)
+        {
+            while(n>0)
+            {
+                AddContact();
+                n--;
+            }
+        }
+        public void AddUniqueContact()
+        {
+            Console.WriteLine("Enter first name in your contact list: ");
+            string name = Console.ReadLine();
 
+            foreach(var data in People)
+            {
+                if (People.Contains(data))
+                {
+                    if (data.FirstName == name)
+                    {
+                        Console.WriteLine("{0} already exists in Address Book, please add a unique name to save.", name);
+                        string uniqueName = Console.ReadLine();
+                        if (dict.ContainsKey(uniqueName))
+                        {
+                            Console.WriteLine("{0} is already exists in contact list.", uniqueName);
+                        }
+                        dict.Add(uniqueName, People);
+                        return;
+                    }
+
+                }
+            }
+            Console.WriteLine("This contactlist doesn't exist, please create a contactlist");
+            return;
+        }
+        public void DisplayUniqueContacts()
+        {
+            Console.WriteLine("Enter the Uniquename of your contacts");
+            string name = Console.ReadLine();
+            foreach (var data in dict)
+            {
+                //Console.WriteLine("The details of " + name + " are \n" + contacts.Value);
+                if (data.Key.Contains(name))
+                {
+                    foreach (var contact in data.Value)
+                    {
+                        Console.WriteLine("The details of {0} are Name: {1} {2}\nEmail: {3}\nPhone Number: {4}\nAddress: {5} " +
+                                             "\ncity: {6}\nZip: {7}\nState: {8}", name, contact.FirstName, contact.LastName,
+                                             contact.Email, contact.PhoneNumber, contact.Address, contact.City, contact.Zip,
+                                             contact.State);
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("this unique name doesn't exist");
+                }
+            }
+            Console.WriteLine("This Uniquelist doesn't exist, please creat a Uniquelist");
+        }
         public void ViewContact()
         {
             foreach (var data in People)

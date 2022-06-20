@@ -8,7 +8,8 @@ CreateContact contact = new CreateContact();
 
 while (true)
 {
-    Console.WriteLine("Enter the number :\n1.Create Contact\n2.Update Contact\n3.Delete contact\n4.View Contact");
+    Console.WriteLine("Enter the number :\n1.Create Contact\n2.Update Contact\n3.Delete contact\n4.Add multiple Contact" +
+                        "\n5.Add Unique Contact\n6.Display unique contact\n7.View Contact");
     int option = Convert.ToInt32(Console.ReadLine());
     switch (option)
     {
@@ -22,6 +23,17 @@ while (true)
             contact.Deletecontact();
             break;
         case 4:
+            Console.WriteLine("Enter the number of contact to add");
+            int n = Convert.ToInt16(Console.ReadLine());  
+            contact.AddMultipleContact(n);
+            break;
+        case 5:
+            contact.AddUniqueContact();
+            break;
+        case 6:
+            contact.DisplayUniqueContacts();
+            break;
+        case 7:
             contact.ViewContact();
             break;
     }
