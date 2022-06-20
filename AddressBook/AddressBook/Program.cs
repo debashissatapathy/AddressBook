@@ -42,9 +42,11 @@ while (true)
             break;
         case 9:
             contact.ContactByCity();
+            contact.DisplayContactsByCities_Dictionary();
             break;
         case 10:
             contact.ContactByState();
+            contact.DisplayContactsByStates_Dictionary();
             break;
         case 11:
             contact.ViewContact();

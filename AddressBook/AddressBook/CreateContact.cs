@@ -308,6 +308,42 @@ namespace AddressBook
             }
 
         }
+        public void DisplayContactsByCities_Dictionary()
+        {
+            if (dict_City.Count == 0)
+                Console.WriteLine("No AddressBook to Show.");
+            if (dict_City.Count >= 1)
+            {
+                foreach (KeyValuePair<string, List<Contacts>> addressBooks in dict_City)
+                {
+                    Console.WriteLine("Contacts From City: " + addressBooks.Key);
+                    foreach (Contacts items in addressBooks.Value)
+                    {
+                        Console.WriteLine($"Name: {items.FirstName + " " + items.LastName}, Phone Number: {items.PhoneNumber}, City: {items.City}, State: {items.State}" +
+                            $"\n Address: {items.Address}, Zipcode: {items.Zip}, Email: {items.Email}");
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+        public void DisplayContactsByStates_Dictionary()
+        {
+            if (dict_State.Count == 0)
+                Console.WriteLine("No AddressBook to Show.");
+            if (dict_State.Count >= 1)
+            {
+                foreach (KeyValuePair<string, List<Contacts>> addressBooks in dict_State)
+                {
+                    Console.WriteLine("Contacts From City: " + addressBooks.Key);
+                    foreach (Contacts items in addressBooks.Value)
+                    {
+                        Console.WriteLine($"Name: {items.FirstName + " " + items.LastName}, Phone Number: {items.PhoneNumber}, City: {items.City}, State: {items.State}" +
+                            $"\n Address: {items.Address}, Zipcode: {items.Zip}, Email: {items.Email}");
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
         public void ViewContact()
         {
             foreach (var data in People)
