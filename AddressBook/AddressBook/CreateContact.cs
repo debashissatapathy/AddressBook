@@ -429,7 +429,29 @@ namespace AddressBook
             }
         }
 
-        
+        string Filepath = @"D:\C#\AddressBook\AddressBook\Contact.txt";
+
+        public void WriteInFileIO()
+        {
+            using (TextWriter sw = File.CreateText(Filepath))
+            {
+                foreach (Contacts item in People)
+                {
+                    Console.WriteLine("Writing the details in Contact.txt File");
+                    Console.WriteLine("Details updated to the Contact.txt file");
+                    sw.WriteLine("FirstName :" + item.FirstName.ToString());
+                    sw.WriteLine("lastName :" + item.LastName.ToString());
+                    sw.WriteLine("Email ID :" + item.Email.ToString());
+                    sw.WriteLine("Mobile Number :" + item.PhoneNumber.ToString());
+                    sw.WriteLine("City  :" + item.City.ToString());
+                    sw.WriteLine("State :" + item.State.ToString());
+                    sw.WriteLine("ZIP :" + item.Zip.ToString());
+                    Console.WriteLine("\n");
+
+                }
+            }
+        }
+
     }
 
 }
