@@ -17,7 +17,7 @@ namespace AddressBook
         public void AddContact()
         {
             int flag = 0;
-            
+
             Console.WriteLine("Enter first Name");
             string AddFirstName = Console.ReadLine();
 
@@ -56,7 +56,7 @@ namespace AddressBook
                 contact.State = Console.ReadLine();
 
                 People.Add(contact);
-                Console.ForegroundColor= ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Contact added successfully.");
                 Console.ResetColor();
                 Console.WriteLine();
@@ -66,9 +66,9 @@ namespace AddressBook
         {
             Console.WriteLine("Enter Firstname for update.");
             string name = Console.ReadLine();
-            foreach(var data in People)
+            foreach (var data in People)
             {
-                if(data.FirstName == null)
+                if (data.FirstName == null)
                 {
                     Console.WriteLine("{0} couldn't found in contact list!", name);
                 }
@@ -77,7 +77,7 @@ namespace AddressBook
                     Console.WriteLine("choose option to update data\n1.FirstName\n2.LastName\n3.address\n4.City\n5.State" +
                                         "\n6.Zip\n7.Email\n8.Phone Number");
                     int ch = Convert.ToInt32(Console.ReadLine());
-                    switch(ch)
+                    switch (ch)
                     {
                         case 1:
                             Console.WriteLine("Please enter the first name: ");
@@ -126,7 +126,7 @@ namespace AddressBook
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Contact updated successfully\n");
                     Console.ResetColor();
-                    
+
                 }
             }
         }
@@ -168,14 +168,30 @@ namespace AddressBook
                 Console.WriteLine("given name contact does not exists");
                 Console.ResetColor();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }       
+            }
         }
+        public void ViewContact()
+        {
+            foreach (var data in People)
+            {
+
+                Console.WriteLine("Name of the Person : " + data.FirstName + " " + data.LastName);
+                Console.WriteLine("Mobile Number : " + data.PhoneNumber);
+                Console.WriteLine("Address: At: {0}, City: {1}, State: {2}-{3}", data.Address, data.City, data.State, data.Zip);
+                Console.WriteLine("Email ID : " + data.Email);
+                Console.WriteLine("\n");
+
+            }
+
+
+        }
+
         public void AddMultipleContact(int n)
         {
-            while(n>0)
+            while (n > 0)
             {
                 AddContact();
                 n--;
@@ -186,7 +202,7 @@ namespace AddressBook
             Console.WriteLine("Enter first name in your contact list: ");
             string name = Console.ReadLine();
 
-            foreach(var data in People)
+            foreach (var data in People)
             {
                 if (People.Contains(data))
                 {
@@ -236,9 +252,9 @@ namespace AddressBook
         {
             Console.WriteLine("Please enter the City or State name");
             string CityOrState = Console.ReadLine();
-            foreach(var data in People)
-            {               
-                if(People.Exists(data => (data.City == CityOrState || data.State == CityOrState)))
+            foreach (var data in People)
+            {
+                if (People.Exists(data => (data.City == CityOrState || data.State == CityOrState)))
                 {
                     Console.WriteLine("Name of the Person : {0} {1}", data.FirstName, data.LastName);
                     Console.WriteLine("Email ID : {0}", data.Email);
@@ -258,7 +274,7 @@ namespace AddressBook
 
             int count = 0;
             foreach (var data in People)
-            {               
+            {
                 if (People.Exists(data => (data.City == CityOrState || data.State == CityOrState)))
                 {
                     count++;
@@ -268,7 +284,7 @@ namespace AddressBook
         }
         public void ContactByCity()
         {
-            
+
             try
             {
                 var data = People.GroupBy(x => x.City);
@@ -292,19 +308,19 @@ namespace AddressBook
             try
             {
                 var data = People.GroupBy(x => x.State);
-                foreach(var states in data)
+                foreach (var states in data)
                 {
                     List<Contacts> statelist = new List<Contacts>();
-                    foreach(var state in states)
+                    foreach (var state in states)
                     {
                         statelist.Add(state);
                     }
                     dict_State.Add(states.Key, statelist);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine(e.Message);  
+                Console.WriteLine(e.Message);
             }
 
         }
@@ -346,9 +362,9 @@ namespace AddressBook
         }
         public void SortContactByName()
         {
-            foreach(var data in People.OrderBy(x => x.FirstName).ToList())
+            foreach (var data in People.OrderBy(x => x.FirstName).ToList())
             {
-                if(People.Contains(data))
+                if (People.Contains(data))
                 {
                     Console.WriteLine("Name of the Person : {0} {1}", data.FirstName, data.LastName);
                     Console.WriteLine("Email ID : {0}", data.Email);
@@ -363,7 +379,7 @@ namespace AddressBook
         }
         public void SortContactByCity()
         {
-            foreach(var data in People.OrderBy(x => x.City).ToList())
+            foreach (var data in People.OrderBy(x => x.City).ToList())
             {
                 if (People.Contains(data))
                 {
@@ -412,21 +428,9 @@ namespace AddressBook
                 }
             }
         }
-        public void ViewContact()
-        {
-            foreach (var data in People)
-            {
 
-                Console.WriteLine("Name of the Person : " + data.FirstName + " " + data.LastName);                
-                Console.WriteLine("Mobile Number : " + data.PhoneNumber);
-                Console.WriteLine("Address: At: {0}, City: {1}, State: {2}-{3}", data.Address, data.City, data.State, data.Zip);
-                Console.WriteLine("Email ID : " + data.Email);
-                Console.WriteLine("\n");
-
-            }
-
-
-        }
+        
     }
-    
+
 }
+
