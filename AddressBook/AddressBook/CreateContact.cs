@@ -171,6 +171,7 @@ namespace AddressBook
                 Console.WriteLine(e.Message);
             }       
         }
+
         public void ViewContact()
         {
             foreach (var data in People)
