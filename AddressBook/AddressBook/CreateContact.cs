@@ -344,6 +344,23 @@ namespace AddressBook
                 }
             }
         }
+        public void SortContactByName()
+        {
+            foreach(var data in People.OrderBy(x => x.FirstName).ToList())
+            {
+                if(People.Contains(data))
+                {
+                    Console.WriteLine("Name of the Person : {0} {1}", data.FirstName, data.LastName);
+                    Console.WriteLine("Email ID : {0}", data.Email);
+                    Console.WriteLine("Mobile Number : {0}", data.PhoneNumber);
+                    Console.WriteLine("Address : {0}", data.Address);
+                    Console.WriteLine("City : {0}", data.City);
+                    Console.WriteLine("State : {0}", data.State);
+                    Console.WriteLine("Zip : {0}", data.Zip);
+                    Console.WriteLine("\n");
+                }
+            }
+        }
         public void ViewContact()
         {
             foreach (var data in People)
