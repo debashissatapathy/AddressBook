@@ -235,10 +235,8 @@ namespace AddressBook
             Console.WriteLine("Please enter the City or State name");
             string CityOrState = Console.ReadLine();
             foreach(var data in People)
-            {
-                string actualCity = data.City;
-                string actualState = data.State;
-                if(People.Exists(data => (actualCity == CityOrState || actualState == CityOrState)))
+            {               
+                if(People.Exists(data => (data.City == CityOrState || data.State == CityOrState)))
                 {
                     Console.WriteLine("Name of the Person : {0} {1}", data.FirstName, data.LastName);
                     Console.WriteLine("Email ID : {0}", data.Email);
@@ -250,6 +248,21 @@ namespace AddressBook
                     Console.WriteLine("\n");
                 }
             }
+        }
+        public void CountByCityState()
+        {
+            Console.WriteLine("Please enter the name of City or State:");
+            string CityOrState = Console.ReadLine();
+
+            int count = 0;
+            foreach (var data in People)
+            {               
+                if (People.Exists(data => (data.City == CityOrState || data.State == CityOrState)))
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine("There are {0} Persons in {1}:", count, CityOrState);
         }
         public void ViewContact()
         {
