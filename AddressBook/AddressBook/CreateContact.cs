@@ -128,6 +128,49 @@ namespace AddressBook
                 }
             }
         }
+        public void Deletecontact()
+        {
+            Console.WriteLine("Enter first name for delete contact.");
+            string name = Console.ReadLine();
+            try
+            {
+                foreach (var data in People)
+                {
+                    if (People.Contains(data))
+                    {
+                        if (data.FirstName == name)
+                        {
+                            Console.WriteLine("{0} is exists in contact list, Do you wany to delete? Press Y/N", name);
+                            string del = Console.ReadLine();
+                            switch (del)
+                            {
+                                case "Y":
+                                    People.Remove(data);
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Contact deleted successfully.");
+                                    Console.ResetColor();
+                                    break;
+                                case "N":
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.WriteLine("Enter valid name.");
+                                    Console.ResetColor();
+                                    break;
+
+                            }
+                            return;
+
+                        }
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("given name contact does not exists");
+                Console.ResetColor();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }       
+        }
         public void ViewContact()
         {
             foreach (var data in People)
