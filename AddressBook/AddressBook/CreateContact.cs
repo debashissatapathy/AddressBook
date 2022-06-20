@@ -12,6 +12,7 @@ namespace AddressBook
         public List<Contacts> People = new List<Contacts>();
         Dictionary<string, List<Contacts>> dict = new Dictionary<string, List<Contacts>>();
         Dictionary<string, List<Contacts>> dict_City = new Dictionary<string, List<Contacts>>();
+        Dictionary<string, List<Contacts>> dict_State = new Dictionary<string, List<Contacts>>();
 
         public void AddContact()
         {
@@ -267,8 +268,7 @@ namespace AddressBook
         }
         public void ContactByCity()
         {
-            Console.WriteLine("Please enter the name of City:");
-            string CityOrState = Console.ReadLine();
+            
             try
             {
                 var data = People.GroupBy(x => x.City);
@@ -286,6 +286,27 @@ namespace AddressBook
             {
                 Console.WriteLine(e.Message);
             }
+        }
+        public void ContactByState()
+        {
+            try
+            {
+                var data = People.GroupBy(x => x.State);
+                foreach(var states in data)
+                {
+                    List<Contacts> statelist = new List<Contacts>();
+                    foreach(var state in states)
+                    {
+                        statelist.Add(state);
+                    }
+                    dict_State.Add(states.Key, statelist);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);  
+            }
+
         }
         public void ViewContact()
         {
