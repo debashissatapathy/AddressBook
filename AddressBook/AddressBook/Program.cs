@@ -10,7 +10,7 @@ while (true)
 {
     Console.WriteLine("Enter the number :\n1.Create Contact\n2.Update Contact\n3.Delete contact\n4.Add multiple Contact" +
                         "\n5.Add Unique Contact\n6.Display unique contact\n7.Search by city or state\n8.Count by city or state" +
-                        "\n9.Contact by city\n10.contact by state\n11.Sort contact by Name\n12:View Contact");
+                        "\n9.Contact by city\n10.contact by state\n11.Sort contact by Name\n12.Sort contact by City\n13.View Contact");
     int option = Convert.ToInt32(Console.ReadLine());
     switch (option)
     {
@@ -52,6 +52,9 @@ while (true)
             contact.SortContactByName();
             break;
         case 12:
+            contact.SortContactByCity();
+            break;
+        case 13:
             contact.ViewContact();
             break;
 
