@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using CsvHelper;
+using System.Globalization;
 
 namespace AddressBook
 {
@@ -34,6 +37,9 @@ namespace AddressBook
             }
             if (flag == 0)
             {
+                Console.WriteLine("Enter First Name : ");
+                contact.FirstName = Console.ReadLine();
+
                 Console.WriteLine("Enter Last Name : ");
                 contact.LastName = Console.ReadLine();
 
@@ -178,7 +184,7 @@ namespace AddressBook
             foreach (var data in People)
             {
 
-                Console.WriteLine("Name of the Person : " + data.FirstName + " " + data.LastName);
+                Console.WriteLine("Name of the Person : {0} {1}", data.FirstName, data.LastName);
                 Console.WriteLine("Mobile Number : " + data.PhoneNumber);
                 Console.WriteLine("Address: At: {0}, City: {1}, State: {2}-{3}", data.Address, data.City, data.State, data.Zip);
                 Console.WriteLine("Email ID : " + data.Email);
@@ -429,8 +435,110 @@ namespace AddressBook
             }
         }
 
-        
+        string FilePath = @"D:\C#\AddressBook\AddressBook\Contact.txt";
+
+        public void WriteInFileIO()
+        {
+            using (TextWriter sw = File.CreateText(FilePath))
+            {
+                foreach (Contacts item in People)
+                {
+                    Console.WriteLine("Writing the details in Contact.txt File......");
+                    Console.WriteLine("Details updated to the Contact.txt file");
+                    sw.WriteLine("FirstName: " + item.FirstName.ToString());
+                    sw.WriteLine("lastName: " + item.LastName.ToString());
+                    sw.WriteLine("Email ID: " + item.Email.ToString());
+                    sw.WriteLine("Mobile Number: " + item.PhoneNumber.ToString());
+                    sw.WriteLine("City: " + item.City.ToString());
+                    sw.WriteLine("State: " + item.State.ToString());
+                    sw.WriteLine("ZIP: " + item.Zip.ToString());
+                    Console.WriteLine("\n");
+
+                }
+            }
+        }
+        public void ReadInFileIO()
+        {
+            if (File.Exists(FilePath))
+            {
+                using (StreamReader file = new StreamReader(FilePath))
+                {
+                    int counter = 0;
+                    string ln;
+
+                    while ((ln = file.ReadLine()) != null)
+                    {
+                        Console.WriteLine(ln);
+                        counter++;
+                    }
+                    file.Close();
+                    Console.WriteLine($"File has {counter} lines.");
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Press Any key to close");
+            Console.ResetColor();
+            Console.ReadKey();
+        }
+        public void AppendInFileIO()
+        {
+            using(TextWriter tw = File.AppendText(FilePath))
+            {
+                foreach(Contacts item in People)
+                {
+                    Console.WriteLine("Appending the new details to the Previous File");
+                    tw.WriteLine("FirstName :" + item.FirstName.ToString());
+                    tw.WriteLine("lastName :" + item.LastName.ToString());
+                    tw.WriteLine("Email ID :" + item.Email.ToString());
+                    tw.WriteLine("Mobile Number :" + item.PhoneNumber.ToString());
+                    tw.WriteLine("City  :" + item.City.ToString());
+                    tw.WriteLine("State :" + item.State.ToString());
+                    tw.WriteLine("ZIP :" + item.Zip.ToString());
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+        string CsvPath = @"D:\C#\AddressBook\AddressBook\WriteToCSV.csv";
+        public void WriteCSVFile()
+        {
+            
+            StreamWriter sw = new StreamWriter(CsvPath);
+            using(var CsvData = new CsvWriter(sw, CultureInfo.InvariantCulture))
+            {
+                CsvData.WriteRecords(People);
+            }
+            Console.WriteLine("People List is saved as Csv file");
+        }
+        public void ReadCSVFile()
+        {
+            if (File.Exists(CsvPath))
+            {
+                StreamReader sr = new StreamReader(CsvPath);
+                CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture);
+                List<Contacts> readCsv = cr.GetRecords<Contacts>().ToList();
+                Console.WriteLine("Reading from CSV file");
+
+                foreach (var item in readCsv)
+                {
+                    Console.WriteLine(item.FirstName.ToString());
+                    Console.WriteLine(item.LastName.ToString());
+                    Console.WriteLine(item.Email.ToString());
+                    Console.WriteLine(item.PhoneNumber.ToString());
+                    Console.WriteLine(item.Address.ToString());
+                    Console.WriteLine(item.City.ToString());
+                    Console.WriteLine(item.State.ToString());
+                    Console.WriteLine(item.Zip.ToString());
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Press Any key to close");
+            Console.ResetColor();
+            Console.ReadKey();
+        }
+            
     }
 
 }
+
+
 
