@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using CsvHelper;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace AddressBook
 {
@@ -535,8 +536,36 @@ namespace AddressBook
             Console.ResetColor();
             Console.ReadKey();
         }
+        string jsonPath = @"D:\C#\AddressBook\AddressBook\WriteToJson.json";
+        public void WriteJsonFile()
+        {
+            foreach (Contacts item in People)
+            {
+                string json = JsonConvert.SerializeObject(People);
+                File.WriteAllText(jsonPath, json);
+            }
+            Console.WriteLine("All data printed");
+        }
+        public void ReadJsonFile()
+        {
+            string jsonData = File.ReadAllText(jsonPath);
+            var jsonResult = JsonConvert.DeserializeObject<List<Contacts>>(jsonData).ToList();
+            Console.WriteLine("Reading from Json file");
+            foreach(var data in jsonResult)
+            {
+                Console.WriteLine("Name of the Person : " + data.FirstName + " " + data.LastName);
+                Console.WriteLine("Email ID : " + data.Email);
+                Console.WriteLine("Mobile Number : " + data.PhoneNumber);
+                Console.WriteLine("Address : " + data.Address);
+                Console.WriteLine("City : " + data.City);
+                Console.WriteLine("State : " + data.State);
+                Console.WriteLine("Zip : " + data.Zip);
+                Console.WriteLine("\n");
+            }
+        }
             
     }
+    
 
 }
 
